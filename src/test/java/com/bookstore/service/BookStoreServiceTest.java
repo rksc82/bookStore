@@ -18,7 +18,7 @@ import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringRunner.class)
-public class BookStoreServiceTest { 
+public class BookStoreServiceTest {  
 
     @Mock
     private BookRepository bookRepository;
