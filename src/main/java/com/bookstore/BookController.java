@@ -1,5 +1,6 @@
 package com.bookstore;
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.*;
@@ -28,7 +29,7 @@ public class BookController {
 
     @RequestMapping(method = RequestMethod.GET, produces= MediaType.APPLICATION_JSON_VALUE, value = "/{id}")
     @ResponseBody
-    public Book findById(@PathVariable Long id) {
+    public Book findById(@PathVariable Long id) throws NotFoundException {
         return bookService.findById(id);
     }
 
@@ -37,8 +38,4 @@ public class BookController {
     public void deleteById(@PathVariable Long id) {
          bookService.deleteById(id);
     }
-
-
-
-
 }

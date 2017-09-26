@@ -1,15 +1,17 @@
 package com.bookstore;
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
 
     @Autowired
-    BookRepository bookRepository;
+    private BookRepository bookRepository;
 
     public List<Book> findAll(){
         List<Book> books = bookRepository.findAll();
@@ -22,17 +24,15 @@ public class BookService {
         return book;
     }
 
-    public Book findById(Long id){
-        Book book = bookRepository.findOne(id);
-        return book;
+    public Book findById(Long id) throws NotFoundException{
+        Optional<Book> book = Optional.of(bookRepository.findOne(id));
+        if(!book.isPresent()) {
+            throw new NotFoundException("Book Not Found:");
+        }
+        return book.get();
     }
 
     public void deleteById(Long id){
          bookRepository.delete(id);
-    }
-
-    public Book updateById(Book book) {
-        bookRepository.save(book);
-        return book;
     }
 }

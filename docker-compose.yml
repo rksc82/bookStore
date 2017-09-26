@@ -1,0 +1,17 @@
+version: "2"
+services:
+
+   elasticsearch:
+      image: elasticsearch:2.3.5
+      mem_limit: 1500m
+      ports:
+        - "9200:9200"
+
+   db:
+      image: postgres
+      mem_limit: 1500m
+      environment:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
+      ports:
+        - "5432:5432"
