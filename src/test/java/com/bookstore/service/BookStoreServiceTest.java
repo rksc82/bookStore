@@ -1,12 +1,14 @@
-package com.bookstore;
+package com.bookstore.service;
 
 
+import com.bookstore.exceptions.BookNotFoundException;
+import com.bookstore.model.Book;
+import com.bookstore.repository.BookRepository;
+import com.bookstore.service.BookService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.junit.*;
-import org.junit.runner.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -39,7 +41,7 @@ public class BookStoreServiceTest {
     }
 
     @Test
-    public void findbyId() {
+    public void findbyId() throws BookNotFoundException {
         Book expected = new Book(1234l, "test", "test", "test");
         when(bookRepository.findOne(1234l)).thenReturn(expected);
         Book actual = bookService.findById(1234l);

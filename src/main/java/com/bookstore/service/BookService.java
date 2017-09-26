@@ -1,5 +1,8 @@
-package com.bookstore;
+package com.bookstore.service;
 
+import com.bookstore.model.Book;
+import com.bookstore.exceptions.BookNotFoundException;
+import com.bookstore.repository.BookRepository;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +27,10 @@ public class BookService {
         return book;
     }
 
-    public Book findById(Long id) throws NotFoundException{
-        Optional<Book> book = Optional.of(bookRepository.findOne(id));
+    public Book findById(Long id) throws BookNotFoundException{
+        Optional<Book> book = Optional.ofNullable(bookRepository.findOne(id));
         if(!book.isPresent()) {
-            throw new NotFoundException("Book Not Found:");
+            throw new BookNotFoundException("Book Not found");
         }
         return book.get();
     }

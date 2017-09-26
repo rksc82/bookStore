@@ -1,5 +1,7 @@
-package com.bookstore;
+package com.bookstore.controller;
 
+import com.bookstore.model.Book;
+import com.bookstore.service.BookService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
