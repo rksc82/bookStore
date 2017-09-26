@@ -1,6 +1,5 @@
 package com.bookstore.controller;
 
-import com.bookstore.controller.BookController;
 import com.bookstore.model.Book;
 import com.bookstore.service.BookService;
 import org.junit.Test;

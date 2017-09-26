@@ -1,6 +1,6 @@
 package com.bookstore.exceptions;
 
-import com.bookstore.model.Book;
+import com.bookstore.model.BookStoreErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,32 +12,14 @@ public class ExceptionHandlers {
     @ExceptionHandler(BookNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public ErrorResponse handleUserNotFoundException(final BookNotFoundException ex) {
-        return new ErrorResponse(HttpStatus.NOT_FOUND.toString(), ex.getMessage());
+    public BookStoreErrorResponse handleUserNotFoundException(final BookNotFoundException ex) {
+        return new BookStoreErrorResponse(HttpStatus.NOT_FOUND.toString(), ex.getMessage());
     }
 
-    @ExceptionHandler(BookStoreExceptionHandler.class)
+    @ExceptionHandler(BookStoreException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public ErrorResponse handleBookStoreException(final BookStoreExceptionHandler ex) {
-        return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.toString(), ex.getMessage());
-    }
-
-    public static class ErrorResponse {
-        private final String code;
-        private final String message;
-
-        public ErrorResponse(String code, String message) {
-            this.code = code;
-            this.message = message;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public String getMessage() {
-            return message;
-        }
+    public BookStoreErrorResponse handleBookStoreException(final BookStoreException ex) {
+        return new BookStoreErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.toString(), ex.getMessage());
     }
 }
