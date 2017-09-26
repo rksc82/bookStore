@@ -1,5 +1,6 @@
 package com.bookstore.exceptions;
 
+import com.bookstore.model.Book;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,6 +14,13 @@ public class ExceptionHandlers {
     @ResponseBody
     public ErrorResponse handleUserNotFoundException(final BookNotFoundException ex) {
         return new ErrorResponse(HttpStatus.NOT_FOUND.toString(), ex.getMessage());
+    }
+
+    @ExceptionHandler(BookStoreExceptionHandler.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ErrorResponse handleBookStoreException(final BookStoreExceptionHandler ex) {
+        return new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR.toString(), ex.getMessage());
     }
 
     public static class ErrorResponse {

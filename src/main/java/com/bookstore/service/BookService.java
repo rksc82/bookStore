@@ -17,8 +17,7 @@ public class BookService {
     private BookRepository bookRepository;
 
     public List<Book> findAll(){
-        List<Book> books = bookRepository.findAll();
-      return books;
+        return bookRepository.findAll();
     }
 
     public Book upsert(Book book){
